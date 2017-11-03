@@ -10,21 +10,7 @@
 __device__ float CalDistance(float X, float R)
 {
 	float result = 0;
-	for (int n = 1; n <= 100; n++)
-	{
-		int m = n % 5;
-		switch (m)
-		{
-		case 0:result += n*sqrt((X - R)*(X - R))*0.2f; break;
-		case 1:result += n*sqrt((X - R)*(X - R))*0.4f; break;
-		case 2:result += n*sqrt((X - R)*(X - R))*0.6f; break;
-		case 3:result += n*sqrt((X - R)*(X - R))*0.7f; break;
-		case 4:result += n*sqrt((X - R)*(X - R)); break;
-		default: break;
-		}
-
-	}
-
+	result = sqrt((X - R)*(X - R));
 	return result;
 }
 
@@ -55,7 +41,7 @@ __global__ void DistKernel(float *dev_D, int N, float R)
 
 int main()
 {
-	int const N = 128;//点数
+	int const N = 100;//点数
 	float R = 6.0f;//参考点
 	float D[N] = { 0 };//计算结果
 	float* dev_D = 0;
@@ -108,7 +94,7 @@ int main()
 		return -1;
 	}
 
-	//printf("D[50]=%f", D[50]);
-	//getchar();
+	printf("D[50]=%f", D[50]);
+	getchar();
 	return 0;
 }
